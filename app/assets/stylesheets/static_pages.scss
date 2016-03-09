@@ -1,0 +1,204 @@
+// Place all the styles related to the StaticPages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "mixins.scss";
+
+.main-page {
+}
+
+h1 {
+  border: 2px solid black;
+  position: relative;
+  float: left;
+  min-height: 260px;
+  min-width: 52px;
+  left: 210px;
+  font-weight: 500;
+  top: -100px;
+  font-size: 20px;
+  text-align: center;
+  box-shadow: 3px 3px #666;
+  margin-top: 0px;
+  z-index: 1;
+  border-radius: 7px;
+  background-color: ivory;
+}
+
+.sharp {
+  min-width: 23px;
+  margin: -26px;
+  transform: translateX(9px);
+  top: -74px;
+  background-color: black;
+  // margin-top: 230px;
+  min-height: 147px;
+  box-shadow: 3px 0px #444;
+  z-index: 2;
+}
+
+.octave {
+  width: 1450px;
+}
+
+.playing {
+  background-color: #eee;
+}
+
+.playing.sharp {
+  background-color: #444;
+}
+
+.group {
+  content: "";
+  display: inline-block;;
+  clear: both;
+}
+
+
+.falling-notes-container {
+
+    height: 345px;
+    max-height:345px;
+}
+
+.falling-regular-note {
+  margin-top: 3px;
+  border-radius: 10px;
+  width: 55px;
+  background-color: purple;
+}
+
+.falling-sharp-note {
+  margin-top: 3px;
+  border-radius: 10px;
+  width: 42px;
+  background-color: green;
+}
+
+
+.C4 {
+  margin-left: 211px;
+}
+
+.C4S {
+  margin-left: 250px;
+}
+
+.D4 {
+  margin-left: 267px;
+}
+
+.D4S {
+  margin-left: 306px;
+}
+
+.E4 {
+  margin-left: 323px;
+}
+
+.F4 {
+  margin-left: 379px;
+}
+
+.F4S {
+margin-left: 418px;
+}
+
+.G4 {
+  margin-left: 435px;
+}
+
+.G4S {
+  margin-left: 474px;
+}
+
+.A4{
+  margin-left: 491px;
+}
+
+.A4S {
+  margin-left: 530px;
+}
+
+.B4 {
+  margin-left: 547px;
+}
+
+.C5 {
+  margin-left: 603px;
+}
+
+.C5S {
+  margin-left: 642px;
+}
+
+.D5 {
+  margin-left: 659px;
+}
+
+.D5S {
+  margin-left: 698px;
+}
+
+.E5 {
+  margin-left: 715px;
+}
+
+.F5 {
+  margin-left: 771px;
+}
+
+.F5S {
+  margin-left: 810px;
+}
+
+.G5 {
+  margin-left: 827px;
+}
+
+.G5S {
+  margin-left: 865px;
+}
+
+.A5 {
+  margin-left: 883px;
+}
+
+.A5S {
+  margin-left: 921px;
+}
+
+.B5 {
+  margin-left: 939px;
+}
+
+.E {
+  height: 7.75px;
+
+}
+
+.Q {
+  height: 15.5px;
+
+}
+
+.H {
+  height: 31px;
+
+}
+
+.F {
+  height: 62px;
+}
+
+.T {
+  height: 124px;
+
+}
+
+.music-note {
+  @include animation("falling-keys infinite linear");
+  @include animation-duration(5s);
+  margin-top: 3px;
+}

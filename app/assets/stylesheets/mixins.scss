@@ -1,0 +1,50 @@
+@mixin keyframes($key-name) {
+    @-webkit-keyframes #{$key-name} {
+        @content;
+    }
+    @-moz-keyframes #{$key-name} {
+        @content;
+    }
+    @-ms-keyframes #{$key-name} {
+        @content;
+    }
+    @-o-keyframes #{$key-name} {
+        @content;
+    }
+    @keyframes #{$key-name} {
+        @content;
+    }
+}
+
+@mixin animation($str) {
+  -webkit-animation: #{$str};
+  -moz-animation: #{$str};
+  -ms-animation: #{$str};
+  -o-animation: #{$str};
+  animation: #{$str};
+}
+
+@mixin animation-duration($str) {
+  -webkit-animation-duration: #{$str};
+  -moz-animation-duration: #{$str};
+  -ms-animation-duration: #{$str};
+  -o-animation-duration: #{$str};
+  animation-duration: #{$str};
+}
+
+@mixin transform($str) {
+  -webkit-transform: #{$str};
+  -moz-transform: #{$str};
+  -ms-transform: #{$str};
+  -o-transform: #{$str};
+  transform: #{$str};
+}
+
+@include keyframes(falling-keys) {
+  0% {
+    @include transform(translateY(-400px))
+  }
+  100% {
+    @include transform(translateY(50px))
+  }
+}
