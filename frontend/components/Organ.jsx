@@ -22,7 +22,6 @@ var Organ = React.createClass({
     var organKeys = this.keys();
     return (
       <div className="main-page">
-        <label>Learn Piano and Typing!</label>
           <div className="falling-notes-container">
             <FightSong />
           </div>

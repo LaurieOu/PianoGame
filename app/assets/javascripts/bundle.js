@@ -19693,11 +19693,6 @@
 	      'div',
 	      { className: 'main-page' },
 	      React.createElement(
-	        'label',
-	        null,
-	        'Learn Piano and Typing!'
-	      ),
-	      React.createElement(
 	        'div',
 	        { className: 'falling-notes-container' },
 	        React.createElement(FightSong, null)
