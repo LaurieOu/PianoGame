@@ -5,6 +5,18 @@
 @import "mixins.scss";
 
 .main-page {
+  position: relative;
+  display: block;
+  margin-left: 0;
+  margin-right: 0;
+  width: 100%;
+  height: 975px;
+  background: url('http://wallpapercave.com/wp/cK9XS6p.jpg') no-repeat center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  text-align: center;
 }
 
 h1 {
@@ -42,11 +54,11 @@ h1 {
 }
 
 .playing {
-  background-color: #63B8FF;
+  background-color: rgba(255,255, 102, 1);
 }
 
 .playing.sharp {
-  background-color: #4F94CD;
+  background-color: rgba(255,178,102, 1);
 }
 
 .group {
@@ -66,115 +78,132 @@ h1 {
   margin-top: 3px;
   border-radius: 10px;
   width: 55px;
-  background-color: purple;
+  background-color: rgba(0,204,204,0.5);
 }
 
 .falling-sharp-note {
   margin-top: 3px;
   border-radius: 10px;
   width: 42px;
-  background-color: green;
+  background-color: rgba(0,204,102,0.5);
 }
 
+.BN {
+  background-color: rgba(255,255,255,0);
+}
 
-.C4 {
+.A3 {
   margin-left: 211px;
+
 }
 
-.C4S {
+.A3S {
   margin-left: 250px;
+
 }
 
-.D4 {
+.B3 {
   margin-left: 267px;
 }
 
-.D4S {
-  margin-left: 306px;
-}
-
-.E4 {
+.C4 {
   margin-left: 323px;
 }
 
-.F4 {
+.C4S {
+  margin-left: 362px;
+}
+
+.D4 {
   margin-left: 379px;
 }
 
-.F4S {
-margin-left: 418px;
+.D4S {
+  margin-left: 418px;
 }
 
-.G4 {
+.E4 {
   margin-left: 435px;
 }
 
-.G4S {
-  margin-left: 474px;
-}
-
-.A4{
+.F4 {
   margin-left: 491px;
 }
 
-.A4S {
-  margin-left: 530px;
+.F4S {
+margin-left: 530px;
 }
 
-.B4 {
+.G4 {
   margin-left: 547px;
 }
 
-.C5 {
+.G4S {
+  margin-left: 586px;
+}
+
+.A4{
   margin-left: 603px;
 }
 
-.C5S {
+.A4S {
   margin-left: 642px;
 }
 
-.D5 {
+.B4 {
   margin-left: 659px;
 }
 
-.D5S {
-  margin-left: 698px;
-}
-
-.E5 {
+.C5 {
   margin-left: 715px;
 }
 
-.F5 {
+.C5S {
+  margin-left: 754px;
+}
+
+.D5 {
   margin-left: 771px;
 }
 
-.F5S {
+.D5S {
   margin-left: 810px;
 }
 
-.G5 {
+.E5 {
   margin-left: 827px;
 }
 
-.G5S {
-  margin-left: 865px;
-}
-
-.A5 {
+.F5 {
   margin-left: 883px;
 }
 
-.A5S {
-  margin-left: 921px;
+.F5S {
+  margin-left: 922px;
 }
 
-.B5 {
+.G5 {
   margin-left: 939px;
 }
 
-.C6 {
+.G5S {
+  margin-left: 978px;
+}
+
+.A5 {
   margin-left: 995px;
+}
+
+.A5S {
+  margin-left: 1034px;
+}
+
+.B5 {
+  margin-left: 1051px;
+}
+
+.C6 {
+  margin-left: 1107px;
 }
 
 .E {
@@ -205,13 +234,11 @@ margin-left: 418px;
   height: 93px;
 }
 
-.BN {
-  background-color: pink;
-}
+
 
 .music-note {
   text-align: center;
   @include animation("falling-keys linear");
-  @include animation-duration(65s);
+  @include animation-duration(55s);
   margin-top: 3px;
 }
