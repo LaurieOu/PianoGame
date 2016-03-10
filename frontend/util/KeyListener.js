@@ -31,7 +31,9 @@ var Mapping = {
   89: 'A5',
   55: 'A5S',
   85: 'B5',
-  73: 'C6'
+  73: 'C6',
+  57: 'C6S',
+  79: 'D6'
 };
 
 var KeyListener = {

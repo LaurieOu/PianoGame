@@ -1,6 +1,11 @@
 var React = require('react');
 
 Mapping = {
+
+ 'A3': 'Z',
+ 'A3S': 'S',
+ 'B3': 'X',
+
  'C4': 'C',
  'C4S': 'F',
  'D4': 'V',
@@ -28,6 +33,8 @@ Mapping = {
  'A5S': '7',
  'B5': 'U',
  'C6': 'I',
+ 'C6S': '9',
+ 'D6': 'O'
 };
 
 var Note = React.createClass({
