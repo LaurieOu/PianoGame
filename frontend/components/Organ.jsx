@@ -4,9 +4,11 @@ var KeyListener = require('../util/KeyListener');
 var Recorder = require('./Recorder');
 var FightSong = require('./FightSong');
 
+
 var keys = [
 'C4','C4S','D4','D4S','E4','F4','F4S','G4','G4S','A4','A4S','B4',
-'C5','C5S','D5','D5S','E5','F5','F5S','G5','G5S','A5','A5S','B5' ];
+'C5','C5S','D5','D5S','E5','F5','F5S','G5','G5S','A5','A5S','B5',
+'C6', 'C6S', 'D6', 'D6S','E4' ];
 
 
 var Organ = React.createClass({

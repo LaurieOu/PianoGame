@@ -42,9 +42,9 @@
 
 @include keyframes(falling-keys) {
   0% {
-    @include transform(translateY(-400px))
+    @include transform(translateY(-2500px))
   }
   100% {
-    @include transform(translateY(50px))
+    @include transform(translateY(5000px))
   }
 }

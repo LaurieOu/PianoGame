@@ -42,11 +42,11 @@ h1 {
 }
 
 .playing {
-  background-color: #eee;
+  background-color: #63B8FF;
 }
 
 .playing.sharp {
-  background-color: #444;
+  background-color: #4F94CD;
 }
 
 .group {
@@ -57,7 +57,7 @@ h1 {
 
 
 .falling-notes-container {
-
+    overflow: hidden;
     height: 345px;
     max-height:345px;
 }
@@ -173,32 +173,45 @@ margin-left: 418px;
   margin-left: 939px;
 }
 
-.E {
-  height: 7.75px;
-
+.C6 {
+  margin-left: 995px;
 }
 
-.Q {
+.E {
   height: 15.5px;
 
 }
 
-.H {
+.Q {
   height: 31px;
 
 }
 
-.F {
+.H {
   height: 62px;
+
+}
+
+.F {
+  height: 124px;
 }
 
 .T {
-  height: 124px;
+  height: 248px;
 
 }
 
+.A {
+  height: 93px;
+}
+
+.BN {
+  background-color: pink;
+}
+
 .music-note {
-  @include animation("falling-keys infinite linear");
-  @include animation-duration(5s);
+  text-align: center;
+  @include animation("falling-keys linear");
+  @include animation-duration(65s);
   margin-top: 3px;
 }

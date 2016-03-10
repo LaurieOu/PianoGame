@@ -19677,7 +19677,7 @@
 	var Recorder = __webpack_require__(187);
 	var FightSong = __webpack_require__(189);
 	
-	var keys = ['C4', 'C4S', 'D4', 'D4S', 'E4', 'F4', 'F4S', 'G4', 'G4S', 'A4', 'A4S', 'B4', 'C5', 'C5S', 'D5', 'D5S', 'E5', 'F5', 'F5S', 'G5', 'G5S', 'A5', 'A5S', 'B5'];
+	var keys = ['C4', 'C4S', 'D4', 'D4S', 'E4', 'F4', 'F4S', 'G4', 'G4S', 'A4', 'A4S', 'B4', 'C5', 'C5S', 'D5', 'D5S', 'E5', 'F5', 'F5S', 'G5', 'G5S', 'A5', 'A5S', 'B5', 'C6', 'C6S', 'D6', 'D6S', 'E4'];
 	
 	var Organ = React.createClass({
 	  displayName: 'Organ',
@@ -26855,7 +26855,7 @@
 	var React = __webpack_require__(147);
 	var Note = __webpack_require__(190);
 	
-	var Melody = ['H G4', 'H G4', 'Q G4', 'Q G4', 'Q F4S', 'Q F4S', 'H G4', 'H G4', 'Q G4', 'E G4', 'E G4', 'Q A4', 'F G4'];
+	var Melody = ['Q B4', 'Q C5', 'Q D5', 'Q D5', 'Q D5', 'A D5', 'Q D5', 'Q E5', 'Q D5', 'A C5', 'F BN', 'Q A4', 'Q C5', 'H C5', 'Q C5', 'Q C5', 'H E5', 'Q D5', 'T B4', 'H BN', 'Q D5', 'H G5', 'Q G5', 'A G5', 'Q E5', 'Q F5S', 'Q G5', 'Q A5', 'Q A5', 'A A5', 'Q BN', 'Q E5', 'Q G5', 'H A5', 'Q A5', 'Q B5', 'Q C6', 'H B5', 'Q G5', 'T A5', 'Q BN'];
 	
 	var FightSong = React.createClass({
 	  displayName: 'FightSong',
@@ -26865,9 +26865,6 @@
 	      return React.createElement(Note, { note: note });
 	    });
 	  },
-	  // componentDidMount: function() {
-	  //   setInterval(10);
-	  // },
 	  render: function () {
 	    var notes = this.notes();
 	
@@ -26888,9 +26885,40 @@
 
 	var React = __webpack_require__(147);
 	
-	var Note = React.createClass({
-	  displayName: "Note",
+	Mapping = {
+	  'C4': 'z',
+	  'C4S': 's',
+	  'D4': 'x',
+	  'D4S': 'd',
+	  'E4': 'c',
+	  'F4': 'v',
+	  'F4S': 'g',
+	  'G4': 'b',
+	  'G4S': 'h',
+	  'A4': 'n',
+	  'A4S': 'j',
+	  'B4': 'm',
+	  'C5': ',',
 	
+	  'C5': 'q',
+	  'C5S': '2',
+	  'D5': 'w',
+	  'D5S': '3',
+	  'E5': 'e',
+	  'F5': 'r',
+	  'F5S': '5',
+	  'G5': 't',
+	  'G5S': '6',
+	  'A5': 'y',
+	  'A5S': '7',
+	  'B5': 'u',
+	  'C6': 'i'
+	};
+	
+	var Note = React.createClass({
+	  displayName: 'Note',
+	
+	  componentDidMount: function () {},
 	
 	  render: function () {
 	    var type = "";
@@ -26903,18 +26931,17 @@
 	      type = "falling-regular-note";
 	    }
 	
+	    var letter = Mapping[note];
 	    var classes = note + " " + beat + " " + type;
 	    return React.createElement(
-	      "div",
+	      'div',
 	      { className: "music-note " + classes },
-	      note
+	      letter
 	    );
 	  }
 	});
 	
 	module.exports = Note;
-	
-	//check whether or not note is on screen and if note actually appears
 
 /***/ }
 /******/ ]);
