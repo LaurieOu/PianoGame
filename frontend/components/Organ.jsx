@@ -23,6 +23,7 @@ var Organ = React.createClass({
     return (
       <div className="main-page">
           <div className="falling-notes-container">
+            <Recorder />
             <FightSong />
           </div>
 

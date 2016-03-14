@@ -12,6 +12,12 @@ var KeyActions = {
       actionType: "REMOVE_NOTE",
       note: key
     });
+  },
+  updateNotes: function(notes) {
+    Dispatcher.dispatch ({
+      actionType: "UPDATE_NOTES",
+      notes: notes
+    });
   }
 };
 

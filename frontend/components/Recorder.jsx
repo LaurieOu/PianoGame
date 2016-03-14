@@ -1,39 +1,53 @@
 var React = require('react');
-var keyStore = require('../stores/key_store');
+var KeyStore = require('../stores/key_store');
 var Track = require('../util/Track');
 
 
 var Recorder = React.createClass({
   getInitialState: function() {
-    return {isRecording: false, track: []};
+    return {isRecording: false, track: new Track()};
   },
-  componentWillMount: function() {
-    this.setState({track: new Track({'name': "", roll:[]})});
-  },
-  recording: function() {
-    var track = this.state.track;
-    console.log(track);
-    if (this.state.isRecording === false) {
-      track.startRecording();
-      this.setState({isRecording: true});
-      var token = setInterval(track.addNotes(), 10);
-    }
-  },
-  endRecording: function () {
-    var track = this.state.track;
-
+  keysChanged: function() {
     if (this.state.isRecording) {
-      this.setState({isRecording: false});
-      var token;
+      this.state.track.addNotes(KeyStore.all())
     }
+  },
+  componentDidMount: function() {
+    KeyStore.addListener(this.keysChanged);
+  },
+  RecordClick: function() {
+    var track = this.state.track;
+    if (this.state.isRecording === false) {
+      this.setState({isRecording: true});
+      track.startRecording();
+    } else {
+      track.stopRecording();
+      this.setState({isRecording: false});
 
-    track.stopRecording();
+    }
+  },
+  playClick: function() {
+    if (!this.state.track.isBlank()) {
+      this.state.track.play();
+    }
+  },
+  messages: function() {
+    if (this.state.isRecording) {
+      return "Stop"
+    }
+    // else if (!this.state.isRecording && this.state.track.isBlank()) {
+    //   return "Done"
+    // } 
+    else {
+      return "Start"
+    }
   },
   render: function() {
     return (
       <div>
-        <button onClick={this.recording}>Start</button>
-        <button onClick={this.endRecording}>Stop</button>
+        <label>Recorder</label><br/>
+        <button onClick={this.RecordClick}>{this.messages()}</button><br/>
+        <button onClick={this.playClick}>Play</button><br/>
       </div>
     );
   }

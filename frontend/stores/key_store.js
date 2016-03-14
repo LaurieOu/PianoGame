@@ -19,10 +19,17 @@ KeyStore.__onDispatch = function (payload) {
       removeNote(payload.note);
       KeyStore.__emitChange();
       break;
+    case "UPDATE_NOTES":
+      updateNotes(payload.notes);
+      KeyStore.__emitChange();
   }
-  // 
+  //
   // console.log(payload);
 };
+
+function updateNotes(notes) {
+  _keys = notes.slice();
+}
 
 function addNote(note) {
   if (note && _keys.indexOf(note) === -1) {

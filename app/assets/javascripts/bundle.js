@@ -19695,6 +19695,7 @@
 	      React.createElement(
 	        'div',
 	        { className: 'falling-notes-container' },
+	        React.createElement(Recorder, null),
 	        React.createElement(FightSong, null)
 	      ),
 	      React.createElement(
@@ -19800,10 +19801,17 @@
 	      removeNote(payload.note);
 	      KeyStore.__emitChange();
 	      break;
+	    case "UPDATE_NOTES":
+	      updateNotes(payload.notes);
+	      KeyStore.__emitChange();
 	  }
 	  //
 	  // console.log(payload);
 	};
+	
+	function updateNotes(notes) {
+	  _keys = notes.slice();
+	}
 	
 	function addNote(note) {
 	  if (note && _keys.indexOf(note) === -1) {
@@ -26776,6 +26784,12 @@
 	      actionType: "REMOVE_NOTE",
 	      note: key
 	    });
+	  },
+	  updateNotes: function (notes) {
+	    Dispatcher.dispatch({
+	      actionType: "UPDATE_NOTES",
+	      notes: notes
+	    });
 	  }
 	};
 	
@@ -26786,51 +26800,71 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(147);
-	var keyStore = __webpack_require__(161);
+	var KeyStore = __webpack_require__(161);
 	var Track = __webpack_require__(188);
 	
 	var Recorder = React.createClass({
 	  displayName: 'Recorder',
 	
 	  getInitialState: function () {
-	    return { isRecording: false, track: [] };
+	    return { isRecording: false, track: new Track() };
 	  },
-	  componentWillMount: function () {
-	    this.setState({ track: new Track({ 'name': "", roll: [] }) });
-	  },
-	  recording: function () {
-	    var track = this.state.track;
-	    console.log(track);
-	    if (this.state.isRecording === false) {
-	      track.startRecording();
-	      this.setState({ isRecording: true });
-	      var token = setInterval(track.addNotes(), 10);
-	    }
-	  },
-	  endRecording: function () {
-	    var track = this.state.track;
-	
+	  keysChanged: function () {
 	    if (this.state.isRecording) {
-	      this.setState({ isRecording: false });
-	      var token;
+	      this.state.track.addNotes(KeyStore.all());
 	    }
-	
-	    track.stopRecording();
+	  },
+	  componentDidMount: function () {
+	    KeyStore.addListener(this.keysChanged);
+	  },
+	  RecordClick: function () {
+	    var track = this.state.track;
+	    if (this.state.isRecording === false) {
+	      this.setState({ isRecording: true });
+	      track.startRecording();
+	    } else {
+	      track.stopRecording();
+	      this.setState({ isRecording: false });
+	    }
+	  },
+	  playClick: function () {
+	    if (!this.state.track.isBlank()) {
+	      this.state.track.play();
+	    }
+	  },
+	  messages: function () {
+	    if (this.state.isRecording) {
+	      return "Stop";
+	    }
+	    // else if (!this.state.isRecording && this.state.track.isBlank()) {
+	    //   return "Done"
+	    // }
+	    else {
+	        return "Start";
+	      }
 	  },
 	  render: function () {
 	    return React.createElement(
 	      'div',
 	      null,
 	      React.createElement(
-	        'button',
-	        { onClick: this.recording },
-	        'Start'
+	        'label',
+	        null,
+	        'Recorder'
 	      ),
+	      React.createElement('br', null),
 	      React.createElement(
 	        'button',
-	        { onClick: this.endRecording },
-	        'Stop'
-	      )
+	        { onClick: this.RecordClick },
+	        this.messages()
+	      ),
+	      React.createElement('br', null),
+	      React.createElement(
+	        'button',
+	        { onClick: this.playClick },
+	        'Play'
+	      ),
+	      React.createElement('br', null)
 	    );
 	  }
 	
@@ -26843,28 +26877,97 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	//attrHash = {name, roll: recipe}
-	var keyStore = __webpack_require__(161);
+	// var keyStore = require('../stores/key_store');
+	var KeyActions = __webpack_require__(186);
 	
 	var Track = function (attrHash) {
-	  var name = attrHash.name;
-	  var sheet = attrHash.roll;
-	  var nowTime;
+	  this.name = "";
+	  this.roll = [];
 	
-	  function startRecording() {
-	    sheet = [];
-	    nowTime = Date.now();
-	  }
-	
-	  function addNotes() {
-	    var timeSlice = Date.now() - nowTime;
-	    var notes = keyStore.all();
-	    sheet.push({ "timeSlice": timeSlice, "notes": notes });
-	  }
-	
-	  function stopRecording() {
-	    this.addNotes([]);
+	  if (attrHash !== undefined) {
+	    this.name = attrHash.name;
+	    this.roll = attrHash.roll;
 	  }
 	};
+	
+	Track.prototype = {
+	  startRecording: function () {
+	    this.roll = [];
+	    this.start = Date.now();
+	  },
+	  addNotes: function (notes) {
+	    var timeDiff = Date.now() - this.start;
+	    this.roll.push({ "timeDiff": timeDiff, "notes": notes });
+	  },
+	  stopRecording: function () {
+	    this.addNotes([]);
+	  },
+	  isBlank: function () {
+	    return this.roll.length === 0;
+	  },
+	  play: function () {
+	    if (this.interval) {
+	      return;
+	    }
+	
+	    var playbackStartTime = Date.now();
+	    var currentNote = 0;
+	
+	    this.interval = setInterval(function () {
+	      if (currentNote < this.roll.length) {
+	        if (Date.now() - playbackStartTime >= this.roll[currentNote].timeDiff) {
+	          var notes = this.roll[currentNote].notes || [];
+	          KeyActions.updateNotes(notes);
+	          currentNote++;
+	        }
+	      } else {
+	        clearInterval(this.interval);
+	        delete this.interval;
+	      }
+	    }.bind(this), 1);
+	  }
+	};
+	
+	// function startRecording() {
+	//   roll = [];
+	//   nowTime = Date.now();
+	// }
+	
+	// function addNotes(notes) {
+	//   var timeDiff = Date.now() - nowTime;
+	//   roll.push({"timeDiff": timeDiff, "notes": notes});
+	// }
+	
+	// function stopRecording() {
+	//   this.addNotes([]);
+	// }
+	
+	//   function isBlank() {
+	//     return roll.length === 0;
+	//   }
+	//
+	//   function play() {
+	//     if (this.interval) {return;}
+	//
+	//     var playbackStartTime = Date.now();
+	//     var currentNote = 0;
+	//
+	//     this.interval = setInterval(function() {
+	//       if (currentNote < roll.length) {
+	//         if (Date.now - playbackStartTime >= roll[currentNote].timeDiff) {
+	//
+	//           var note = roll[currentNote].notes || [] ;
+	//           KeyActions.updateNotes(notes);
+	//           currentNote++;
+	//         }
+	//       } else {
+	//         clearInterval(this.interval);
+	//         delete this.interval
+	//       }
+	//     }.bind(this), 1);
+	//   }
+	//
+	//
 	
 	module.exports = Track;
 

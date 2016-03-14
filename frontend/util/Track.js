@@ -1,27 +1,93 @@
 //attrHash = {name, roll: recipe}
-var keyStore = require('../stores/key_store');
+// var keyStore = require('../stores/key_store');
+var KeyActions = require('../actions/KeyActions');
 
 var Track = function (attrHash) {
-  var name = attrHash.name;
-  var sheet = attrHash.roll;
-  var nowTime;
+  this.name = "";
+  this.roll = [];
 
-
-  function startRecording() {
-    sheet = [];
-    nowTime = Date.now();
+  if (attrHash !== undefined) {
+    this.name = attrHash.name;
+    this.roll = attrHash.roll;
   }
+}
 
-  function addNotes() {
-    var timeSlice = Date.now() - nowTime;
-    var notes = keyStore.all();
-    sheet.push({"timeSlice": timeSlice, "notes": notes});
-  }
-
-  function stopRecording() {
+Track.prototype = {
+  startRecording: function() {
+    this.roll = [];
+    this.start = Date.now();
+  },
+  addNotes: function(notes) {
+    var timeDiff = Date.now() - this.start;
+    this.roll.push({"timeDiff": timeDiff, "notes": notes});
+  },
+  stopRecording: function() {
     this.addNotes([]);
-  }
+  },
+  isBlank: function() {
+    return this.roll.length === 0;
+  },
+  play: function() {
+    if (this.interval) {return;}
 
+    var playbackStartTime = Date.now();
+    var currentNote = 0;
+
+    this.interval = setInterval(function() {
+      if (currentNote < this.roll.length) {
+        if (Date.now() - playbackStartTime >= this.roll[currentNote].timeDiff) {
+          var notes = this.roll[currentNote].notes || [] ;
+          KeyActions.updateNotes(notes);
+          currentNote++;
+        }
+      } else {
+        clearInterval(this.interval);
+        delete this.interval
+      }
+    }.bind(this), 1);
+  }
 };
+
+  // function startRecording() {
+  //   roll = [];
+  //   nowTime = Date.now();
+  // }
+
+
+  // function addNotes(notes) {
+  //   var timeDiff = Date.now() - nowTime;
+  //   roll.push({"timeDiff": timeDiff, "notes": notes});
+  // }
+
+  // function stopRecording() {
+  //   this.addNotes([]);
+  // }
+
+//   function isBlank() {
+//     return roll.length === 0;
+//   }
+//
+//   function play() {
+//     if (this.interval) {return;}
+//
+//     var playbackStartTime = Date.now();
+//     var currentNote = 0;
+//
+//     this.interval = setInterval(function() {
+//       if (currentNote < roll.length) {
+//         if (Date.now - playbackStartTime >= roll[currentNote].timeDiff) {
+//
+//           var note = roll[currentNote].notes || [] ;
+//           KeyActions.updateNotes(notes);
+//           currentNote++;
+//         }
+//       } else {
+//         clearInterval(this.interval);
+//         delete this.interval
+//       }
+//     }.bind(this), 1);
+//   }
+//
+//
 
 module.exports = Track;
