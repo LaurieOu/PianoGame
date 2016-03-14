@@ -28,11 +28,13 @@ var Key = React.createClass({
   render: function() {
     var id = this.props.id;
     var type = '';
+    var notesLabel = "notes-label";
 
     this.playNote(id);
 
     if (id.includes('S')) {
       type += ' sharp';
+      notesLabel += "-S"
     }
     if (this.state.playing) {
       type += ' playing';
@@ -40,7 +42,7 @@ var Key = React.createClass({
 
     return (
       <div >
-        <h1 id={id} className={type}> </h1>
+        <h1 id={id} className={type}><span className={notesLabel}>{id}</span></h1>
       </div>
     );
   }

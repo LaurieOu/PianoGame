@@ -19751,11 +19751,13 @@
 	  render: function () {
 	    var id = this.props.id;
 	    var type = '';
+	    var notesLabel = "notes-label";
 	
 	    this.playNote(id);
 	
 	    if (id.includes('S')) {
 	      type += ' sharp';
+	      notesLabel += "-S";
 	    }
 	    if (this.state.playing) {
 	      type += ' playing';
@@ -19767,7 +19769,11 @@
 	      React.createElement(
 	        'h1',
 	        { id: id, className: type },
-	        ' '
+	        React.createElement(
+	          'span',
+	          { className: notesLabel },
+	          id
+	        )
 	      )
 	    );
 	  }
@@ -26846,22 +26852,22 @@
 	  render: function () {
 	    return React.createElement(
 	      'div',
-	      null,
+	      { className: 'recorder-container' },
 	      React.createElement(
 	        'label',
-	        null,
+	        { className: 'recorder-font' },
 	        'Recorder'
 	      ),
 	      React.createElement('br', null),
 	      React.createElement(
 	        'button',
-	        { onClick: this.RecordClick },
+	        { onClick: this.RecordClick, className: 'recorder-button' },
 	        this.messages()
 	      ),
 	      React.createElement('br', null),
 	      React.createElement(
 	        'button',
-	        { onClick: this.playClick },
+	        { onClick: this.playClick, className: 'recorder-button' },
 	        'Play'
 	      ),
 	      React.createElement('br', null)

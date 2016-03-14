@@ -51,6 +51,7 @@ h1 {
 	background:linear-gradient(45deg, #222 0%,#555 100%);
 }
 
+
 .octave {
   width: 1450px;
 }
@@ -251,11 +252,41 @@ margin-left: 440px;
   height: 93px;
 }
 
-
-
 .music-note {
   text-align: center;
   @include animation("falling-keys linear");
-  @include animation-duration(180s);
+  @include animation-duration(160s);
   margin-top: 3px;
+}
+
+.recorder-container {
+  font-size: 20px;
+  width: 115px;
+  border-style: solid;
+  border-width: 3px;
+}
+
+.recorder-font {
+  font-family: inherit;
+}
+
+.recorder-button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  margin-bottom: 7px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.notes-label {
+  position: relative;
+  top: 230px;
+}
+
+.notes-label-S {
+  color: white;
+  font-size: 15px;
 }
