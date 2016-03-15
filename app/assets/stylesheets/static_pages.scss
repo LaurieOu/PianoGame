@@ -19,7 +19,15 @@
   text-align: center;
 }
 
+.piano-type-label {
+  font-size: 50px;
+  font-weight: bold;
+  font-family: sans-serif;
+
+}
+
 h1 {
+  font-family: sans-serif;
   border: 1.5px solid black;
   position: relative;
   float: left;
@@ -38,12 +46,12 @@ h1 {
 }
 
 .sharp {
+  font-family: sans-serif;
   min-width: 26px;
   margin: -26px;
   transform: translateX(9px);
   top: 26px;
   background-color: black;
-  // margin-top: 230px;
   min-height: 147px;
   box-shadow: 3px 0px #444;
   z-index: 2;
@@ -62,7 +70,7 @@ h1 {
 
 .playing.sharp {
   // background-color: rgba(255,255,255, 1);
-  box-shadow:-1px -1px 2px rgba(255,255,255,0.2) inset, 0 -2px 2px 3px rgba(0,0,0,0.6) inset, 0 1px 2px rgba(0,0,0,0.5);
+  box-shadow:-1px -1px 2px rgba(255,255,255,0.2) inset, 0 -2px 2px 3px rgba(0,255,0,0.5) inset, 0 1px 2px rgba(0,255,0,3);
   background:linear-gradient(left, #444 0%,#222 100%);
 }
 
@@ -85,6 +93,11 @@ h1 {
   border-radius: 10px;
   width: 55px;
   background-color: rgba(255,255,51,0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  font-family: sans-serif;
 }
 
 .falling-sharp-note {
@@ -93,6 +106,12 @@ h1 {
   border-radius: 10px;
   width: 24px;
   background-color: rgba(0,102,0,0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  font-family: sans-serif;
+
   // background-color: rgba(0,204,102,0.5);
 }
 
@@ -259,15 +278,17 @@ margin-left: 440px;
   margin-top: 3px;
 }
 
+
+
 .recorder-container {
   font-size: 20px;
-  width: 115px;
+  width: 145px;
   border-style: solid;
   border-width: 3px;
 }
 
 .recorder-font {
-  font-family: inherit;
+  font-family: sans-serif;
 }
 
 .recorder-button {
@@ -288,5 +309,44 @@ margin-left: 440px;
 
 .notes-label-S {
   color: white;
-  font-size: 15px;
+  font-size: 12px;
+}
+
+.instructions-container {
+  width: 500px;
+  background: rgba(255,255,255,0.5);
+  font-size: 30px;
+  font-family: sans-serif;
+  position: absolute;
+  top: 9%;
+  left: 30%;
+}
+
+.practice-on-own-button {
+  background-color: #FFD700;
+  border: none;
+  color: black;
+  margin-bottom: 7px;
+  text-align: center;
+  font-weight: bold;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  position: absolute;
+  left: 35px;
+  bottom: -35px;
+}
+
+.play-song-button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  margin-bottom: 7px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  position: absolute;
+  right: 35px;
+  bottom: -35px;
 }

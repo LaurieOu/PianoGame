@@ -19675,7 +19675,7 @@
 	var Key = __webpack_require__(160);
 	var KeyListener = __webpack_require__(185);
 	var Recorder = __webpack_require__(187);
-	var FightSong = __webpack_require__(189);
+	var Instructions = __webpack_require__(191);
 	
 	var keys = ['A3', 'A3S', 'B3', 'C4', 'C4S', 'D4', 'D4S', 'E4', 'F4', 'F4S', 'G4', 'G4S', 'A4', 'A4S', 'B4', 'C5', 'C5S', 'D5', 'D5S', 'E5', 'F5', 'F5S', 'G5', 'G5S', 'A5', 'A5S', 'B5', 'C6', 'C6S', 'D6'];
 	
@@ -19695,8 +19695,13 @@
 	      React.createElement(
 	        'div',
 	        { className: 'falling-notes-container' },
+	        React.createElement(
+	          'label',
+	          { className: 'piano-type-label' },
+	          'PianoType'
+	        ),
 	        React.createElement(Recorder, null),
-	        React.createElement(FightSong, null)
+	        React.createElement(Instructions, null)
 	      ),
 	      React.createElement(
 	        'div',
@@ -26840,13 +26845,13 @@
 	  },
 	  messages: function () {
 	    if (this.state.isRecording) {
-	      return "Stop";
+	      return "Stop Recording";
 	    }
 	    // else if (!this.state.isRecording && this.state.track.isBlank()) {
 	    //   return "Done"
 	    // }
 	    else {
-	        return "Start";
+	        return "Start Recording";
 	      }
 	  },
 	  render: function () {
@@ -26868,7 +26873,7 @@
 	      React.createElement(
 	        'button',
 	        { onClick: this.playClick, className: 'recorder-button' },
-	        'Play'
+	        'Play Recording'
 	      ),
 	      React.createElement('br', null)
 	    );
@@ -27083,6 +27088,67 @@
 	});
 	
 	module.exports = Note;
+
+/***/ },
+/* 191 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(147);
+	var FightSong = __webpack_require__(189);
+	
+	var Instructions = React.createClass({
+	  displayName: 'Instructions',
+	
+	  getInitialState: function () {
+	    return { show: true, showFightSong: false };
+	  },
+	  individualPractice: function () {
+	    this.setState({ show: false });
+	  },
+	  playSong: function () {
+	    this.setState({ show: false });
+	    this.setState({ showFightSong: true });
+	  },
+	  render: function () {
+	    var instructions = "";
+	    if (this.state.show) {
+	      instructions = React.createElement(
+	        'div',
+	        { className: 'instructions-container' },
+	        React.createElement(
+	          'label',
+	          null,
+	          'Welcome! You can practice and record yourself on the piano or you can play a song we have written, just type the letter you see inside the falling rectangles.'
+	        ),
+	        React.createElement('br', null),
+	        React.createElement(
+	          'button',
+	          { onClick: this.individualPractice, className: 'practice-on-own-button' },
+	          'Practice On Your Own'
+	        ),
+	        React.createElement(
+	          'button',
+	          { onClick: this.playSong, className: 'play-song-button' },
+	          'Play A Whole New World!'
+	        )
+	      );
+	    };
+	
+	    var fightSong = "";
+	    if (this.state.showFightSong) {
+	      fightSong = React.createElement(FightSong, null);
+	    };
+	
+	    return React.createElement(
+	      'div',
+	      null,
+	      instructions,
+	      fightSong
+	    );
+	  }
+	});
+	
+	module.exports = Instructions;
 
 /***/ }
 /******/ ]);

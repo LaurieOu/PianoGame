@@ -33,13 +33,13 @@ var Recorder = React.createClass({
   },
   messages: function() {
     if (this.state.isRecording) {
-      return "Stop"
+      return "Stop Recording"
     }
     // else if (!this.state.isRecording && this.state.track.isBlank()) {
     //   return "Done"
     // }
     else {
-      return "Start"
+      return "Start Recording"
     }
   },
   render: function() {
@@ -47,7 +47,7 @@ var Recorder = React.createClass({
       <div className="recorder-container">
         <label className="recorder-font">Recorder</label><br/>
         <button onClick={this.RecordClick} className="recorder-button">{this.messages()}</button><br/>
-        <button onClick={this.playClick} className="recorder-button">Play</button><br/>
+        <button onClick={this.playClick} className="recorder-button">Play Recording</button><br/>
       </div>
     );
   }

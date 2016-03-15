@@ -2,8 +2,7 @@ var React = require('react');
 var Key = require('./Key');
 var KeyListener = require('../util/KeyListener');
 var Recorder = require('./Recorder');
-var FightSong = require('./FightSong');
-
+var Instructions = require('./instructions');
 
 var keys = [
 'A3','A3S','B3',
@@ -23,8 +22,9 @@ var Organ = React.createClass({
     return (
       <div className="main-page">
           <div className="falling-notes-container">
+            <label className="piano-type-label">PianoType</label>
             <Recorder />
-            <FightSong />
+            <Instructions />
           </div>
 
           <div className="octave">
