@@ -48,46 +48,4 @@ Track.prototype = {
   }
 };
 
-  // function startRecording() {
-  //   roll = [];
-  //   nowTime = Date.now();
-  // }
-
-
-  // function addNotes(notes) {
-  //   var timeDiff = Date.now() - nowTime;
-  //   roll.push({"timeDiff": timeDiff, "notes": notes});
-  // }
-
-  // function stopRecording() {
-  //   this.addNotes([]);
-  // }
-
-//   function isBlank() {
-//     return roll.length === 0;
-//   }
-//
-//   function play() {
-//     if (this.interval) {return;}
-//
-//     var playbackStartTime = Date.now();
-//     var currentNote = 0;
-//
-//     this.interval = setInterval(function() {
-//       if (currentNote < roll.length) {
-//         if (Date.now - playbackStartTime >= roll[currentNote].timeDiff) {
-//
-//           var note = roll[currentNote].notes || [] ;
-//           KeyActions.updateNotes(notes);
-//           currentNote++;
-//         }
-//       } else {
-//         clearInterval(this.interval);
-//         delete this.interval
-//       }
-//     }.bind(this), 1);
-//   }
-//
-//
-
 module.exports = Track;
