@@ -313,13 +313,31 @@ margin-left: 440px;
 }
 
 .instructions-container {
-  width: 500px;
+  width: 755px;
+  height: 200px;
   background: rgba(255,255,255,0.5);
-  font-size: 30px;
-  font-family: sans-serif;
   position: absolute;
-  top: 9%;
-  left: 30%;
+  top: 11%;
+  left: 15%;
+  background: url('https://s3.amazonaws.com/static.musescore.com/437961/b2f763ff21/score_1.png?no-cache=1455124328') no-repeat center center;
+}
+
+.instructions-text1 {
+  font-size: 20px;
+  font-family: fantasy;
+  position: absolute;
+  font-weight: bold;
+  top: -30px;
+  left: 55px;
+}
+
+.instructions-text2 {
+  font-size: 20px;
+  font-family: fantasy;
+  position: absolute;
+  font-weight: bold;
+  top: 135px;
+  left: 15px;
 }
 
 .practice-on-own-button {
@@ -333,8 +351,8 @@ margin-left: 440px;
   display: inline-block;
   font-size: 16px;
   position: absolute;
-  left: 35px;
-  bottom: -35px;
+  left: 500px;
+  bottom: 168px;
 }
 
 .play-song-button {
@@ -347,6 +365,6 @@ margin-left: 440px;
   display: inline-block;
   font-size: 16px;
   position: absolute;
-  right: 35px;
-  bottom: -35px;
+  right: 60px;
+  bottom: 2px;
 }

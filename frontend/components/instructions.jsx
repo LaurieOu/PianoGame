@@ -17,10 +17,14 @@ var Instructions = React.createClass({
     if (this.state.show) {
       instructions = (
         <div className="instructions-container">
-          <label>
-            Welcome! You can practice and record yourself on the piano or you can play a song we have written, just type
-            the letter you see inside the falling rectangles.
+          <label className="instructions-text1">
+            Welcome! You can practice independently and record yourself on the piano.
           </label><br/>
+
+          <label className="instructions-text2">
+            OR you can play "A Whole New World" from Aladdin! Type the letters inside the falling rectangles. --->
+          </label><br/>
+
           <button onClick={this.individualPractice} className="practice-on-own-button">Practice On Your Own</button>
           <button onClick={this.playSong} className="play-song-button">Play A Whole New World!</button>
         </div>)
