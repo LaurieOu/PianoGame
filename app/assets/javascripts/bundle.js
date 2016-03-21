@@ -19729,6 +19729,43 @@
 	var Tones = __webpack_require__(183);
 	var Note = __webpack_require__(184);
 	
+	Mapping = {
+	
+	  'A3': 'Z',
+	  'A3S': 'S',
+	  'B3': 'X',
+	
+	  'C4': 'C',
+	  'C4S': 'F',
+	  'D4': 'V',
+	  'D4S': 'G',
+	  'E4': 'B',
+	  'F4': 'N',
+	  'F4S': 'J',
+	  'G4': 'M',
+	  'G4S': 'K',
+	  'A4': '<',
+	  'A4S': 'L',
+	  'B4': '>',
+	  'C5': '?',
+	
+	  'C5': 'Q',
+	  'C5S': '2',
+	  'D5': 'W',
+	  'D5S': '3',
+	  'E5': 'E',
+	  'F5': 'R',
+	  'F5S': '5',
+	  'G5': 'T',
+	  'G5S': '6',
+	  'A5': 'Y',
+	  'A5S': '7',
+	  'B5': 'U',
+	  'C6': 'I',
+	  'C6S': '9',
+	  'D6': 'O'
+	};
+	
 	var Key = React.createClass({
 	  displayName: 'Key',
 	
@@ -19755,6 +19792,7 @@
 	  },
 	  render: function () {
 	    var id = this.props.id;
+	    var letter = Mapping[id];
 	    var type = '';
 	    var notesLabel = "notes-label";
 	
@@ -19777,7 +19815,7 @@
 	        React.createElement(
 	          'span',
 	          { className: notesLabel },
-	          id
+	          letter
 	        )
 	      )
 	    );
@@ -26938,47 +26976,6 @@
 	    }.bind(this), 1);
 	  }
 	};
-	
-	// function startRecording() {
-	//   roll = [];
-	//   nowTime = Date.now();
-	// }
-	
-	// function addNotes(notes) {
-	//   var timeDiff = Date.now() - nowTime;
-	//   roll.push({"timeDiff": timeDiff, "notes": notes});
-	// }
-	
-	// function stopRecording() {
-	//   this.addNotes([]);
-	// }
-	
-	//   function isBlank() {
-	//     return roll.length === 0;
-	//   }
-	//
-	//   function play() {
-	//     if (this.interval) {return;}
-	//
-	//     var playbackStartTime = Date.now();
-	//     var currentNote = 0;
-	//
-	//     this.interval = setInterval(function() {
-	//       if (currentNote < roll.length) {
-	//         if (Date.now - playbackStartTime >= roll[currentNote].timeDiff) {
-	//
-	//           var note = roll[currentNote].notes || [] ;
-	//           KeyActions.updateNotes(notes);
-	//           currentNote++;
-	//         }
-	//       } else {
-	//         clearInterval(this.interval);
-	//         delete this.interval
-	//       }
-	//     }.bind(this), 1);
-	//   }
-	//
-	//
 	
 	module.exports = Track;
 
