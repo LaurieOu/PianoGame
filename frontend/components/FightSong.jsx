@@ -42,6 +42,7 @@ var FightSong = React.createClass({
 
       return (
         <div>
+          <label className="tip-label">Tip: Focus on typing the letters :)</label>
           {notes}
         </div>
       );

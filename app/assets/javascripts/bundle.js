@@ -19669,7 +19669,7 @@
 	var Key = __webpack_require__(160);
 	var KeyListener = __webpack_require__(185);
 	var Recorder = __webpack_require__(187);
-	var Instructions = __webpack_require__(188);
+	var Instructions = __webpack_require__(189);
 	
 	var keys = ['A3', 'A3S', 'B3', 'C4', 'C4S', 'D4', 'D4S', 'E4', 'F4', 'F4S', 'G4', 'G4S', 'A4', 'A4S', 'B4', 'C5', 'C5S', 'D5', 'D5S', 'E5', 'F5', 'F5S', 'G5', 'G5S', 'A5', 'A5S', 'B5', 'C6', 'C6S', 'D6'];
 	
@@ -19700,6 +19700,15 @@
 	          'PianoType'
 	        ),
 	        React.createElement(Recorder, null),
+	        React.createElement(
+	          'button',
+	          { className: 'home-button' },
+	          React.createElement(
+	            'a',
+	            { href: '/' },
+	            'Home'
+	          )
+	        ),
 	        React.createElement(Instructions, null)
 	      ),
 	      React.createElement(
@@ -26849,7 +26858,7 @@
 
 	var React = __webpack_require__(147);
 	var KeyStore = __webpack_require__(161);
-	var Track = __webpack_require__(191);
+	var Track = __webpack_require__(188);
 	
 	var Recorder = React.createClass({
 	  displayName: 'Recorder',
@@ -26932,8 +26941,66 @@
 /* 188 */
 /***/ function(module, exports, __webpack_require__) {
 
+	//attrHash = {name, roll: recipe}
+	// var keyStore = require('../stores/key_store');
+	var KeyActions = __webpack_require__(186);
+	
+	var Track = function (attrHash) {
+	  this.name = "";
+	  this.roll = [];
+	
+	  if (attrHash !== undefined) {
+	    this.name = attrHash.name;
+	    this.roll = attrHash.roll;
+	  }
+	};
+	
+	Track.prototype = {
+	  startRecording: function () {
+	    this.roll = [];
+	    this.start = Date.now();
+	  },
+	  addNotes: function (notes) {
+	    var timeDiff = Date.now() - this.start;
+	    this.roll.push({ "timeDiff": timeDiff, "notes": notes });
+	  },
+	  stopRecording: function () {
+	    this.addNotes([]);
+	  },
+	  isBlank: function () {
+	    return this.roll.length === 0;
+	  },
+	  play: function () {
+	    if (this.interval) {
+	      return;
+	    }
+	
+	    var playbackStartTime = Date.now();
+	    var currentNote = 0;
+	
+	    this.interval = setInterval(function () {
+	      if (currentNote < this.roll.length) {
+	        if (Date.now() - playbackStartTime >= this.roll[currentNote].timeDiff) {
+	          var notes = this.roll[currentNote].notes || [];
+	          KeyActions.updateNotes(notes);
+	          currentNote++;
+	        }
+	      } else {
+	        clearInterval(this.interval);
+	        delete this.interval;
+	      }
+	    }.bind(this), 1);
+	  }
+	};
+	
+	module.exports = Track;
+
+/***/ },
+/* 189 */
+/***/ function(module, exports, __webpack_require__) {
+
 	var React = __webpack_require__(147);
-	var FightSong = __webpack_require__(189);
+	var FightSong = __webpack_require__(190);
 	
 	var Instructions = React.createClass({
 	  displayName: 'Instructions',
@@ -26996,11 +27063,11 @@
 	module.exports = Instructions;
 
 /***/ },
-/* 189 */
+/* 190 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(147);
-	var Note = __webpack_require__(190);
+	var Note = __webpack_require__(191);
 	
 	// 'Q B4', 'Q C5', 'Q D5', 'Q D5', 'Q D5', 'A D5', 'Q D5', 'Q E5', 'Q D5', 'A C5', 'F BN',
 	// 'Q A4', 'Q C5', 'H C5', 'Q C5', 'Q C5', 'H E5', 'Q D5', 'T B4', 'H BN',
@@ -27023,6 +27090,11 @@
 	    return React.createElement(
 	      'div',
 	      null,
+	      React.createElement(
+	        'label',
+	        { className: 'tip-label' },
+	        'Tip: Focus on typing the letters :)'
+	      ),
 	      notes
 	    );
 	  }
@@ -27032,7 +27104,7 @@
 	module.exports = FightSong;
 
 /***/ },
-/* 190 */
+/* 191 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(147);
@@ -27101,64 +27173,6 @@
 	});
 	
 	module.exports = Note;
-
-/***/ },
-/* 191 */
-/***/ function(module, exports, __webpack_require__) {
-
-	//attrHash = {name, roll: recipe}
-	// var keyStore = require('../stores/key_store');
-	var KeyActions = __webpack_require__(186);
-	
-	var Track = function (attrHash) {
-	  this.name = "";
-	  this.roll = [];
-	
-	  if (attrHash !== undefined) {
-	    this.name = attrHash.name;
-	    this.roll = attrHash.roll;
-	  }
-	};
-	
-	Track.prototype = {
-	  startRecording: function () {
-	    this.roll = [];
-	    this.start = Date.now();
-	  },
-	  addNotes: function (notes) {
-	    var timeDiff = Date.now() - this.start;
-	    this.roll.push({ "timeDiff": timeDiff, "notes": notes });
-	  },
-	  stopRecording: function () {
-	    this.addNotes([]);
-	  },
-	  isBlank: function () {
-	    return this.roll.length === 0;
-	  },
-	  play: function () {
-	    if (this.interval) {
-	      return;
-	    }
-	
-	    var playbackStartTime = Date.now();
-	    var currentNote = 0;
-	
-	    this.interval = setInterval(function () {
-	      if (currentNote < this.roll.length) {
-	        if (Date.now() - playbackStartTime >= this.roll[currentNote].timeDiff) {
-	          var notes = this.roll[currentNote].notes || [];
-	          KeyActions.updateNotes(notes);
-	          currentNote++;
-	        }
-	      } else {
-	        clearInterval(this.interval);
-	        delete this.interval;
-	      }
-	    }.bind(this), 1);
-	  }
-	};
-	
-	module.exports = Track;
 
 /***/ }
 /******/ ]);
