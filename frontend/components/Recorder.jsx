@@ -31,27 +31,35 @@ var Recorder = React.createClass({
       this.state.track.play();
     }
   },
+  playMessages: function() {
+    if (!this.state.track.isBlank()) {
+      return (
+        <div>
+          <img src="http://wasabiapp.org/wordpress/wp-content/uploads/playbutton.png" className="play-button"/>
+        </div>
+        )
+    }
+  },
   messages: function() {
     if (this.state.isRecording) {
       return (
         <div>
           <img src="https://lh3.ggpht.com/mfLTneC0BUBQOAI5Da7ftOz4HCoU3ibn7BMWcE9KDiUelzquRqhj8Ln2kR1iih3KVCE=w170" className="red-dot"/>
-          <label> Stop Recording</label>
+          <img src="http://freeiconbox.com/icon/256/23728.png" className="stop-button"/>
         </div>)
     }
     // else if (!this.state.isRecording && this.state.track.isBlank()) {
     //   return "Done"
     // }
     else {
-      return "Start Recording"
+      return <img src="https://cdn3.iconfinder.com/data/icons/line/36/record-512.png" className="record-button"/>
     }
   },
   render: function() {
     return (
       <div className="recorder-container">
-        <label className="recorder-font">Recorder</label><br/>
-        <button onClick={this.RecordClick} className="recorder-button">{this.messages()}</button><br/>
-        <button onClick={this.playClick} className="recorder-button">Play Recording</button><br/>
+        <div onClick={this.RecordClick}>{this.messages()}</div><br/>
+        <div onClick={this.playClick} >{this.playMessages()}</div><br/>
       </div>
     );
   }

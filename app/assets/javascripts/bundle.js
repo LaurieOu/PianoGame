@@ -19692,11 +19692,6 @@
 	      'div',
 	      { className: 'main-page' },
 	      React.createElement(
-	        'button',
-	        { onClick: this.homeClick },
-	        'Home'
-	      ),
-	      React.createElement(
 	        'div',
 	        { className: 'falling-notes-container' },
 	        React.createElement(
@@ -26885,24 +26880,29 @@
 	      this.state.track.play();
 	    }
 	  },
+	  playMessages: function () {
+	    if (!this.state.track.isBlank()) {
+	      return React.createElement(
+	        'div',
+	        null,
+	        React.createElement('img', { src: 'http://wasabiapp.org/wordpress/wp-content/uploads/playbutton.png', className: 'play-button' })
+	      );
+	    }
+	  },
 	  messages: function () {
 	    if (this.state.isRecording) {
 	      return React.createElement(
 	        'div',
 	        null,
 	        React.createElement('img', { src: 'https://lh3.ggpht.com/mfLTneC0BUBQOAI5Da7ftOz4HCoU3ibn7BMWcE9KDiUelzquRqhj8Ln2kR1iih3KVCE=w170', className: 'red-dot' }),
-	        React.createElement(
-	          'label',
-	          null,
-	          ' Stop Recording'
-	        )
+	        React.createElement('img', { src: 'http://freeiconbox.com/icon/256/23728.png', className: 'stop-button' })
 	      );
 	    }
 	    // else if (!this.state.isRecording && this.state.track.isBlank()) {
 	    //   return "Done"
 	    // }
 	    else {
-	        return "Start Recording";
+	        return React.createElement('img', { src: 'https://cdn3.iconfinder.com/data/icons/line/36/record-512.png', className: 'record-button' });
 	      }
 	  },
 	  render: function () {
@@ -26910,21 +26910,15 @@
 	      'div',
 	      { className: 'recorder-container' },
 	      React.createElement(
-	        'label',
-	        { className: 'recorder-font' },
-	        'Recorder'
-	      ),
-	      React.createElement('br', null),
-	      React.createElement(
-	        'button',
-	        { onClick: this.RecordClick, className: 'recorder-button' },
+	        'div',
+	        { onClick: this.RecordClick },
 	        this.messages()
 	      ),
 	      React.createElement('br', null),
 	      React.createElement(
-	        'button',
-	        { onClick: this.playClick, className: 'recorder-button' },
-	        'Play Recording'
+	        'div',
+	        { onClick: this.playClick },
+	        this.playMessages()
 	      ),
 	      React.createElement('br', null)
 	    );

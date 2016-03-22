@@ -26,7 +26,6 @@ var Organ = React.createClass({
     var organKeys = this.keys();
     return (
       <div className="main-page">
-          <button onClick={this.homeClick}>Home</button>
           <div className="falling-notes-container">
             <label className="piano-type-label">PianoType</label>
             <Recorder />
