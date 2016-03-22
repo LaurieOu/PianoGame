@@ -55,12 +55,6 @@
 	var KeyActions = __webpack_require__(186);
 	var KeyListener = __webpack_require__(185).KeyListener;
 	
-	window.Dispatcher = Dispatcher;
-	window.Note = Note;
-	window.KeyStore = KeyStore;
-	window.KeyActions = KeyActions;
-	window.KeyListener = KeyListener;
-	
 	document.addEventListener("DOMContentLoaded", function () {
 	  var organ = document.querySelector('#content');
 	  ReactDOM.render(React.createElement(Organ, null), organ);
@@ -19675,23 +19669,33 @@
 	var Key = __webpack_require__(160);
 	var KeyListener = __webpack_require__(185);
 	var Recorder = __webpack_require__(187);
-	var Instructions = __webpack_require__(189);
+	var Instructions = __webpack_require__(188);
 	
 	var keys = ['A3', 'A3S', 'B3', 'C4', 'C4S', 'D4', 'D4S', 'E4', 'F4', 'F4S', 'G4', 'G4S', 'A4', 'A4S', 'B4', 'C5', 'C5S', 'D5', 'D5S', 'E5', 'F5', 'F5S', 'G5', 'G5S', 'A5', 'A5S', 'B5', 'C6', 'C6S', 'D6'];
 	
 	var Organ = React.createClass({
 	  displayName: 'Organ',
 	
+	  getInitialState: function () {
+	    return { render: false };
+	  },
 	  componentWillMount: function () {
 	    KeyListener.keyStart();
 	    KeyListener.keyEnd();
 	  },
-	
+	  homeClick: function () {
+	    this.setState({ render: true });
+	  },
 	  render: function () {
 	    var organKeys = this.keys();
 	    return React.createElement(
 	      'div',
 	      { className: 'main-page' },
+	      React.createElement(
+	        'button',
+	        { onClick: this.homeClick },
+	        'Home'
+	      ),
 	      React.createElement(
 	        'div',
 	        { className: 'falling-notes-container' },
@@ -26850,7 +26854,7 @@
 
 	var React = __webpack_require__(147);
 	var KeyStore = __webpack_require__(161);
-	var Track = __webpack_require__(188);
+	var Track = __webpack_require__(191);
 	
 	var Recorder = React.createClass({
 	  displayName: 'Recorder',
@@ -26883,7 +26887,16 @@
 	  },
 	  messages: function () {
 	    if (this.state.isRecording) {
-	      return "Stop Recording";
+	      return React.createElement(
+	        'div',
+	        null,
+	        React.createElement('img', { src: 'https://lh3.ggpht.com/mfLTneC0BUBQOAI5Da7ftOz4HCoU3ibn7BMWcE9KDiUelzquRqhj8Ln2kR1iih3KVCE=w170', className: 'red-dot' }),
+	        React.createElement(
+	          'label',
+	          null,
+	          ' Stop Recording'
+	        )
+	      );
 	    }
 	    // else if (!this.state.isRecording && this.state.track.isBlank()) {
 	    //   return "Done"
@@ -26925,66 +26938,8 @@
 /* 188 */
 /***/ function(module, exports, __webpack_require__) {
 
-	//attrHash = {name, roll: recipe}
-	// var keyStore = require('../stores/key_store');
-	var KeyActions = __webpack_require__(186);
-	
-	var Track = function (attrHash) {
-	  this.name = "";
-	  this.roll = [];
-	
-	  if (attrHash !== undefined) {
-	    this.name = attrHash.name;
-	    this.roll = attrHash.roll;
-	  }
-	};
-	
-	Track.prototype = {
-	  startRecording: function () {
-	    this.roll = [];
-	    this.start = Date.now();
-	  },
-	  addNotes: function (notes) {
-	    var timeDiff = Date.now() - this.start;
-	    this.roll.push({ "timeDiff": timeDiff, "notes": notes });
-	  },
-	  stopRecording: function () {
-	    this.addNotes([]);
-	  },
-	  isBlank: function () {
-	    return this.roll.length === 0;
-	  },
-	  play: function () {
-	    if (this.interval) {
-	      return;
-	    }
-	
-	    var playbackStartTime = Date.now();
-	    var currentNote = 0;
-	
-	    this.interval = setInterval(function () {
-	      if (currentNote < this.roll.length) {
-	        if (Date.now() - playbackStartTime >= this.roll[currentNote].timeDiff) {
-	          var notes = this.roll[currentNote].notes || [];
-	          KeyActions.updateNotes(notes);
-	          currentNote++;
-	        }
-	      } else {
-	        clearInterval(this.interval);
-	        delete this.interval;
-	      }
-	    }.bind(this), 1);
-	  }
-	};
-	
-	module.exports = Track;
-
-/***/ },
-/* 189 */
-/***/ function(module, exports, __webpack_require__) {
-
 	var React = __webpack_require__(147);
-	var FightSong = __webpack_require__(190);
+	var FightSong = __webpack_require__(189);
 	
 	var Instructions = React.createClass({
 	  displayName: 'Instructions',
@@ -27047,11 +27002,11 @@
 	module.exports = Instructions;
 
 /***/ },
-/* 190 */
+/* 189 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(147);
-	var Note = __webpack_require__(191);
+	var Note = __webpack_require__(190);
 	
 	// 'Q B4', 'Q C5', 'Q D5', 'Q D5', 'Q D5', 'A D5', 'Q D5', 'Q E5', 'Q D5', 'A C5', 'F BN',
 	// 'Q A4', 'Q C5', 'H C5', 'Q C5', 'Q C5', 'H E5', 'Q D5', 'T B4', 'H BN',
@@ -27064,8 +27019,8 @@
 	  displayName: 'FightSong',
 	
 	  notes: function () {
-	    return Melody.reverse().map(function (note) {
-	      return React.createElement(Note, { note: note });
+	    return Melody.reverse().map(function (note, idx) {
+	      return React.createElement(Note, { note: note, key: idx });
 	    });
 	  },
 	  render: function () {
@@ -27083,7 +27038,7 @@
 	module.exports = FightSong;
 
 /***/ },
-/* 191 */
+/* 190 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(147);
@@ -27152,6 +27107,64 @@
 	});
 	
 	module.exports = Note;
+
+/***/ },
+/* 191 */
+/***/ function(module, exports, __webpack_require__) {
+
+	//attrHash = {name, roll: recipe}
+	// var keyStore = require('../stores/key_store');
+	var KeyActions = __webpack_require__(186);
+	
+	var Track = function (attrHash) {
+	  this.name = "";
+	  this.roll = [];
+	
+	  if (attrHash !== undefined) {
+	    this.name = attrHash.name;
+	    this.roll = attrHash.roll;
+	  }
+	};
+	
+	Track.prototype = {
+	  startRecording: function () {
+	    this.roll = [];
+	    this.start = Date.now();
+	  },
+	  addNotes: function (notes) {
+	    var timeDiff = Date.now() - this.start;
+	    this.roll.push({ "timeDiff": timeDiff, "notes": notes });
+	  },
+	  stopRecording: function () {
+	    this.addNotes([]);
+	  },
+	  isBlank: function () {
+	    return this.roll.length === 0;
+	  },
+	  play: function () {
+	    if (this.interval) {
+	      return;
+	    }
+	
+	    var playbackStartTime = Date.now();
+	    var currentNote = 0;
+	
+	    this.interval = setInterval(function () {
+	      if (currentNote < this.roll.length) {
+	        if (Date.now() - playbackStartTime >= this.roll[currentNote].timeDiff) {
+	          var notes = this.roll[currentNote].notes || [];
+	          KeyActions.updateNotes(notes);
+	          currentNote++;
+	        }
+	      } else {
+	        clearInterval(this.interval);
+	        delete this.interval;
+	      }
+	    }.bind(this), 1);
+	  }
+	};
+	
+	module.exports = Track;
 
 /***/ }
 /******/ ]);

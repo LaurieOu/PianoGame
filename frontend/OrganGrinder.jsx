@@ -9,12 +9,6 @@ var KeyStore = require('./stores/key_store');
 var KeyActions = require('./actions/KeyActions');
 var KeyListener = require('./util/KeyListener').KeyListener;
 
-window.Dispatcher = Dispatcher;
-window.Note = Note;
-window.KeyStore = KeyStore;
-window.KeyActions = KeyActions;
-window.KeyListener = KeyListener;
-
 document.addEventListener("DOMContentLoaded", function () {
   var organ = document.querySelector('#content');
   ReactDOM.render(<Organ />, organ);

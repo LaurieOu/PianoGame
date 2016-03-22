@@ -33,7 +33,11 @@ var Recorder = React.createClass({
   },
   messages: function() {
     if (this.state.isRecording) {
-      return "Stop Recording"
+      return (
+        <div>
+          <img src="https://lh3.ggpht.com/mfLTneC0BUBQOAI5Da7ftOz4HCoU3ibn7BMWcE9KDiUelzquRqhj8Ln2kR1iih3KVCE=w170" className="red-dot"/>
+          <label> Stop Recording</label>
+        </div>)
     }
     // else if (!this.state.isRecording && this.state.track.isBlank()) {
     //   return "Done"

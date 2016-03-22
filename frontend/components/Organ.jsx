@@ -12,15 +12,21 @@ var keys = [
 
 
 var Organ = React.createClass({
+  getInitialState: function() {
+    return {render: false};
+  },
   componentWillMount: function () {
     KeyListener.keyStart();
     KeyListener.keyEnd();
   },
-
+  homeClick: function() {
+    this.setState({render: true});
+  },
   render: function() {
     var organKeys = this.keys();
     return (
       <div className="main-page">
+          <button onClick={this.homeClick}>Home</button>
           <div className="falling-notes-container">
             <label className="piano-type-label">PianoType</label>
             <Recorder />
@@ -30,6 +36,7 @@ var Organ = React.createClass({
           <div className="octave">
             {organKeys}
           </div>
+
       </div>
     );
   },

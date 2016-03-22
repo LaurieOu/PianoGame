@@ -10,7 +10,7 @@ var Instructions = React.createClass({
   },
   playSong: function() {
     this.setState({show: false});
-  this.setState({showFightSong: true});
+    this.setState({showFightSong: true});
   },
   render: function() {
     var instructions = "";

@@ -33,8 +33,8 @@ var Melody = [
 
 var FightSong = React.createClass({
   notes: function() {
-    return Melody.reverse().map(function(note) {
-      return <Note note={note} />;
+    return Melody.reverse().map(function(note,idx) {
+      return <Note note={note} key={idx}/>;
     });
   },
   render: function(){
