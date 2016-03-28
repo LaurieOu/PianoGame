@@ -4,10 +4,8 @@ module.exports = {
   context: __dirname,
   entry: "./frontend/OrganGrinder.jsx",
   output: {
-    path: path.join(__dirname, 'app', 'assets', 'javascripts'),
+    path: "./",
     filename: "bundle.js",
-    devtoolModuleFilenameTemplate: '[resourcePath]',
-    devtoolFallbackModuleFilenameTemplate: '[resourcePath]?[hash]'
   },
   module: {
     loaders: [
