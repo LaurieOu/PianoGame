@@ -29,7 +29,7 @@ var Organ = React.createClass({
           <div className="falling-notes-container">
             <label className="piano-type-label">PianoType</label>
             <Recorder />
-            <button className="home-button"><a href="/">Home</a></button>
+            <button className="home-button"><a href="http://laurieou.github.io/PianoGame/">Home</a></button>
             <Instructions />
           </div>
 
