@@ -19686,6 +19686,10 @@
 	  homeClick: function () {
 	    this.setState({ render: true });
 	  },
+	  reloadPage: function (e) {
+	    e.preventDefault();
+	    location.reload();
+	  },
 	  render: function () {
 	    var organKeys = this.keys();
 	    return React.createElement(
@@ -19702,12 +19706,8 @@
 	        React.createElement(Recorder, null),
 	        React.createElement(
 	          'button',
-	          { className: 'home-button' },
-	          React.createElement(
-	            'a',
-	            { href: '/' },
-	            'Home'
-	          )
+	          { className: 'home-button', onClick: this.reloadPage },
+	          'Home'
 	        ),
 	        React.createElement(Instructions, null)
 	      ),

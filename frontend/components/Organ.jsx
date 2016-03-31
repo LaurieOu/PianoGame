@@ -22,6 +22,10 @@ var Organ = React.createClass({
   homeClick: function() {
     this.setState({render: true});
   },
+  reloadPage: function(e){
+    e.preventDefault();
+    location.reload();
+  },
   render: function() {
     var organKeys = this.keys();
     return (
@@ -29,7 +33,7 @@ var Organ = React.createClass({
           <div className="falling-notes-container">
             <label className="piano-type-label">PianoType</label>
             <Recorder />
-            <button className="home-button"><a href="http://laurieou.github.io/PianoGame/">Home</a></button>
+            <button className="home-button" onClick={this.reloadPage}>Home</button>
             <Instructions />
           </div>
 
