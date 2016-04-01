@@ -428,35 +428,48 @@ margin-left: 440px;
   font-size: 12px;
 }
 
-.instructions-container {
+.instructions-container{
   width: 755px;
-  height: 200px;
-  background: rgba(255,255,255,0.5);
+  height: 165px;
+  // background: rgba(255,255,255,0.5);
   position: absolute;
-  top: 11%;
+  top: 9%;
   left: 17%;
-  background: url('https://s3.amazonaws.com/static.musescore.com/437961/b2f763ff21/score_1.png?no-cache=1455124328') no-repeat center center;
+  // background: url('https://openclipart.org/image/2400px/svg_to_png/188702/cyberscooty-music-notes.png') no-repeat center center;
+}
+
+.notes-picture {
+  position: absolute;
+  width: 390px;
+  top: 115px;
+  left: 300px;
+}
+
+.whole-new-world-instructions{
+  padding-top: 35px;
+  float: left;
+  border: 3px solid black;
+  height: 100%;
+  width: 370px;
+  margin-left: -3px;
 }
 
 .instructions-text1 {
   font-size: 20px;
   font-family: fantasy;
-  position: absolute;
   font-weight: bold;
-  top: -30px;
-  left: 55px;
+
 }
 
 .instructions-text2 {
   font-size: 20px;
   font-family: fantasy;
-  position: absolute;
   font-weight: bold;
-  top: 135px;
-  left: 15px;
+
 }
 
 .practice-on-own-button {
+  margin-top: 7px;
   background-color: #FFD700;
   border: none;
   color: black;
@@ -466,12 +479,10 @@ margin-left: 440px;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  position: absolute;
-  left: 500px;
-  bottom: 168px;
 }
 
 .play-song-button {
+  margin-top: 7px;
   background-color: #4CAF50; /* Green */
   border: none;
   color: white;
@@ -480,7 +491,5 @@ margin-left: 440px;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  position: absolute;
-  right: 60px;
-  bottom: 2px;
+
 }

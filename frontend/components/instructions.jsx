@@ -17,17 +17,23 @@ var Instructions = React.createClass({
     if (this.state.show) {
       instructions = (
         <div className="instructions-container">
-          <label className="instructions-text1">
-            Welcome! You can practice independently and record yourself on the piano.
-          </label><br/>
+          <img src="http://www.streathamchoral.com/communities/6/004/012/793/646//images/4613017096.gif" className="notes-picture" />
+          <div className="whole-new-world-instructions">
+            <label className="instructions-text2">
+              Welcome! You can play "A Whole New World" from Aladdin! Type the letters inside the falling rectangles.
+            </label><br/>
+            <button onClick={this.playSong} className="play-song-button">Play A Whole New World!</button>
+          </div>
 
-          <label className="instructions-text2">
-            OR you can play "A Whole New World" from Aladdin! Type the letters inside the falling rectangles. --->
-          </label><br/>
+          <div className="whole-new-world-instructions">
+            <label className="instructions-text1">
+              OR you can practice independently and record yourself on the piano.
+            </label><br/>
+            <button onClick={this.individualPractice} className="practice-on-own-button">Practice On Your Own</button>
+          </div>
 
-          <button onClick={this.individualPractice} className="practice-on-own-button">Practice On Your Own</button>
-          <button onClick={this.playSong} className="play-song-button">Play A Whole New World!</button>
-        </div>)
+        </div>
+      )
     };
 
     var fightSong = "";

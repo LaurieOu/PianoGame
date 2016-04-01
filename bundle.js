@@ -27021,27 +27021,36 @@
 	      instructions = React.createElement(
 	        'div',
 	        { className: 'instructions-container' },
+	        React.createElement('img', { src: 'http://www.streathamchoral.com/communities/6/004/012/793/646//images/4613017096.gif', className: 'notes-picture' }),
 	        React.createElement(
-	          'label',
-	          { className: 'instructions-text1' },
-	          'Welcome! You can practice independently and record yourself on the piano.'
+	          'div',
+	          { className: 'whole-new-world-instructions' },
+	          React.createElement(
+	            'label',
+	            { className: 'instructions-text2' },
+	            'Welcome! You can play "A Whole New World" from Aladdin! Type the letters inside the falling rectangles.'
+	          ),
+	          React.createElement('br', null),
+	          React.createElement(
+	            'button',
+	            { onClick: this.playSong, className: 'play-song-button' },
+	            'Play A Whole New World!'
+	          )
 	        ),
-	        React.createElement('br', null),
 	        React.createElement(
-	          'label',
-	          { className: 'instructions-text2' },
-	          'OR you can play "A Whole New World" from Aladdin! Type the letters inside the falling rectangles. --->'
-	        ),
-	        React.createElement('br', null),
-	        React.createElement(
-	          'button',
-	          { onClick: this.individualPractice, className: 'practice-on-own-button' },
-	          'Practice On Your Own'
-	        ),
-	        React.createElement(
-	          'button',
-	          { onClick: this.playSong, className: 'play-song-button' },
-	          'Play A Whole New World!'
+	          'div',
+	          { className: 'whole-new-world-instructions' },
+	          React.createElement(
+	            'label',
+	            { className: 'instructions-text1' },
+	            'OR you can practice independently and record yourself on the piano.'
+	          ),
+	          React.createElement('br', null),
+	          React.createElement(
+	            'button',
+	            { onClick: this.individualPractice, className: 'practice-on-own-button' },
+	            'Practice On Your Own'
+	          )
 	        )
 	      );
 	    };
